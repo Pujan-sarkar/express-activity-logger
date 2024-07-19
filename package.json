@@ -4,8 +4,9 @@
   "description": "Real-time activity logging for Express.js applications",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start-logger": "express-activity-logger start"
+}
+,
   "bin": {
     "express-activity-logger": "./bin/cli.js"
   },

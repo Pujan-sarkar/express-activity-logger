@@ -3,7 +3,7 @@ const moment = require('moment');
 
 function setupLogger(app, io) {
   const format = ':method :url :status :response-time ms - :res[content-length]';
-  
+
   morgan.token('date', () => moment().format('YYYY-MM-DD HH:mm:ss'));
 
   app.use(morgan(format, {
@@ -21,3 +21,4 @@ function setupLogger(app, io) {
 }
 
 module.exports = { setupLogger };
+
