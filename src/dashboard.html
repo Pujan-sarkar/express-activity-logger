@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Logger Dashboard</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .log {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .log.error {
+      border-color: #f44336;
+      background-color: #ffebee;
+    }
+  </style>
+</head>
+<body>
+  <h1>Activity Logger Dashboard</h1>
+  <div id="logs"></div>
+  <script>
+    const socket = io();
+    const logsContainer = document.getElementById('logs');
+
+    socket.on('log', (data) => {
+      const logElement = document.createElement('div');
+      logElement.className = 'log';
+      logElement.textContent = `${data.date}: ${data.message}`;
+      logsContainer.appendChild(logElement);
+    });
+
+    socket.on('error', (data) => {
+      const logElement = document.createElement('div');
+      logElement.className = 'log error';
+      logElement.textContent = `${data.date}: ${data.message}\n${data.stack}`;
+      logsContainer.appendChild(logElement);
+    });
+  </script>
+</body>
+</html>
